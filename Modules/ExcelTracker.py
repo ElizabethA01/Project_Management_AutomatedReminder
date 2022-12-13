@@ -1,6 +1,6 @@
 import openpyxl
 import pandas as pd
-from DraftEmail import TimeStamp, SendEmail
+from draftEmail import TimeStamp, SendEmail
 
 class ExcelTracker:
     def __init__(self, email_tracker_filename: str, sheetname: str, alert: str =None) -> None:
@@ -55,4 +55,7 @@ class ExcelTracker:
             self.append_to_sheet(first_name, last_name, discipline, email)
 
 
-
+email_tracker_filename = r'C:\Users\ukaea001\Documents\PythonPrograms\PLMB\Reminders\Email_listing_tracker.xlsx'
+sheetname = 'Invoice'
+f = ExcelTracker(email_tracker_filename, sheetname)
+print(f)
