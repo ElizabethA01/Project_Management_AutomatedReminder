@@ -4,7 +4,7 @@ from Modules.ExcelAdapter import ExcelAdapter
 from Modules.ExcelTracker import ExcelTracker
 from Modules.disciplines_details import DisciplineLead
 
-# email tracking list excel file location
+# required inputs
 filenames = {
     "email_tracker": r'C:\Users\ukaea001\Documents\PythonPrograms\PLMB\Reminders\Email_listing_tracker.xlsx',
     "sheetname": 'Invoice',
