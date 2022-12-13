@@ -1,5 +1,3 @@
-from ExcelSheets import ExcelAdapter
-
 # define class for discipline leads
 class MDLTracker:
     # start_row = None
@@ -22,31 +20,8 @@ class DisciplineLead:
         self.discipline = discipline
         self.spreadsheet_work = spreadsheet_work
         self.discipline_leads = []
-    
-    # # assign discipline lead class
-    # def assign_class(contact):
-    #     return DisciplineLead(contact)
-        
-    
-    # def get_discipline_contact(self, filename):
-    #     for contact in ExcelSheets.ExcelAdapter.df_to_list(filename):
-    #         self.discipline_leads.append(self.assign_class(contact))
-    #     print(self.discipline_leads)
-
-    # # get certain names from a list input. loop and check names 
-    # def find_specific_disciplines():
-    #     pass
 
 
-contacts_list_filename = r'C:\Users\ukaea001\Documents\PythonPrograms\PLMB\List_of_contacts.xlsx'
-
-discipline_lead = []
-for lead in ExcelAdapter(contacts_list_filename).df_to_list():
-    # DisciplineLead(lead[0:4], spreadsheet_work= lead[-2])
-    # print(DisciplineLead(lead))
-    # discipline_lead.append(DisciplineLead(lead))
-
-print(discipline_lead)
 
     
 
