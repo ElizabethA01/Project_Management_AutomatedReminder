@@ -1,5 +1,4 @@
 # Existing file 
-
 import codecs
 import win32com.client as win32
 from datetime import datetime
@@ -76,7 +75,6 @@ def send_invoice_email():
             inspector = mail.getInspector
             # Adding signature image
             doc = inspector.WordEditor
-            print(doc)
             selection = doc.Content
             selection.Find.Text = "insert image"
             selection.Find.Execute()

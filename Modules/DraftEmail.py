@@ -42,8 +42,6 @@ class SendEmail:
             mail.HTMLBody = email_body + signature_code
             # Adding signature image
             inspector = mail.getInspector
-            # print(mail)
-            # print(inspector)
             doc = inspector.WordEditor
             print(doc)
             selection = doc.Content
@@ -53,6 +51,7 @@ class SendEmail:
             img = selection.InlineShapes.AddPicture(cls.img_path, 0, 1)
             mail.display()
             # mail.Send()
+            print('Invoice email alert activated - message sent')
             # raise exception instead! ----------------------------------------------
         except Exception as e:
             print("Invoice email alert failed to send: " + str(e))
