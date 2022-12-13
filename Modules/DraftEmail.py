@@ -43,7 +43,6 @@ class SendEmail:
             # Adding signature image
             inspector = mail.getInspector
             doc = inspector.WordEditor
-            print(doc)
             selection = doc.Content
             selection.Find.Text = "insert image"
             selection.Find.Execute()
