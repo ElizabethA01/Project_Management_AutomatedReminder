@@ -30,14 +30,13 @@ class EmailSignature:
         return signature_code
 
 class SendEmail:
-    mailCC_contacts = 'carolina.morales@wsp.com' # need to modify and add to ignore file
     img_path = r'C:\Users\ukaea001\AppData\Roaming\Microsoft\Signatures\Elizabeth Adejumo_files\image001.png'
 
     @classmethod
-    def draft_email(cls, email_body: str, subject: str, email_to: str):
+    def draft_email(cls, email_body: str, subject: str, email_to: str, cc_contacts: str = None):
         try:
             mail = win32.Dispatch('outlook.application').CreateItem(0)
-            mail.To, mail.cc, mail.Subject = email_to, cls.mailCC_contacts, subject
+            mail.To, mail.cc, mail.Subject = email_to, cc_contacts, subject
             signature_code = EmailSignature.get_signature()
             mail.HTMLBody = email_body + signature_code
             # Adding signature image
@@ -50,17 +49,17 @@ class SendEmail:
             img = selection.InlineShapes.AddPicture(cls.img_path, 0, 1)
             mail.display()
             # mail.Send()
-            print('Invoice email alert activated - message sent')
+            return True
             # raise exception instead! ----------------------------------------------
         except Exception as e:
-            print("Invoice email alert failed to send: " + str(e))
+            print("Invoice email alert failed to send: " + str(e) + ". You need to open the outlook application to ensure email sends.")
                 
 class InvoiceEmail(SendEmail):
     def __init__(self) -> None:
         super().__init__()
 
     @classmethod
-    def send_invoice_reminder(cls, first_name: str, discipline: str, email_to: str):
+    def send_invoice_reminder(cls, first_name: str, discipline: str, email_to: str, cc_contacts: str = None):
         previous_month = calendar.month_name[TimeStamp.now.month-1]
         subject = f'PLMB {discipline} - Invoice Reminder for {previous_month} ' + TimeStamp.now.strftime('%Y')
         email_body = r'''
@@ -71,7 +70,8 @@ class InvoiceEmail(SendEmail):
             Please ignore this email if you have sent your invoice previously. <br><br>
             Thanks.<br><br>
             '''.format(previous_month, TimeStamp.now.year, first_name)
-        cls.draft_email(email_body = email_body, subject = subject, email_to = email_to)
+        outcome = cls.draft_email(email_body = email_body, subject = subject, email_to = email_to, cc_contacts=cc_contacts)
+        return outcome
 
 
     

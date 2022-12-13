@@ -1,19 +1,20 @@
 import openpyxl
 import pandas as pd
-from draftEmail import TimeStamp, SendEmail
+from datetime import datetime
 
 class ExcelTracker:
+    now = datetime.now()
     def __init__(self, email_tracker_filename: str, sheetname: str, alert: str =None) -> None:
         self.email_tracker_filename = email_tracker_filename
         self.sheetname = sheetname
         self.alert = alert     
 
-    def append_to_sheet(self, first_name, last_name, discipline, email):
+    def append_to_sheet(self, first_name, last_name, discipline, email, cc_contacts):
         wb = openpyxl.load_workbook(self.email_tracker_filename)
         if self.sheetname == "Timesheet":
-            df = pd.DataFrame([[TimeStamp.now, first_name + ' ' + last_name, discipline, email, SendEmail.mailCC_contacts, self.sheetname + ' - '+ self.alert]])
+            df = pd.DataFrame([[ExcelTracker.now, first_name + ' ' + last_name, discipline, email, cc_contacts, self.sheetname + ' - '+ self.alert]])
         else: 
-            df = pd.DataFrame([[TimeStamp.now, first_name + ' ' + last_name, discipline, email, SendEmail.mailCC_contacts, self.sheetname]])
+            df = pd.DataFrame([[ExcelTracker.now, first_name + ' ' + last_name, discipline, email, cc_contacts, self.sheetname]])
         writer = pd.ExcelWriter(self.email_tracker_filename, if_sheet_exists='overlay', mode='a', engine='openpyxl')
         wb.active = wb[self.sheetname]
         # get the max rows of non-empty cells
@@ -39,23 +40,17 @@ class ExcelTracker:
         print('new file created')
 
     # check if file does exist 
-    def add_to_tracker(self, first_name: str, last_name: str, discipline: str, email: str):
+    def add_to_tracker(self, first_name: str, last_name: str, discipline: str, email: str, cc_contacts: str = None):
         wb = openpyxl.load_workbook(self.email_tracker_filename)
         try:
             if self.sheetname in wb.sheetnames: 
                 # if file exists, new email log is appended to file
-                self.append_to_sheet(first_name, last_name, discipline, email)
+                self.append_to_sheet(first_name, last_name, discipline, email, cc_contacts)
             else:
                 self.create_new_sheet()
-                self.append_to_sheet(first_name, last_name, discipline, email)
+                self.append_to_sheet(first_name, last_name, discipline, email, cc_contacts)
         except FileNotFoundError:
             print('file not found')
             self.create_new_file()
             self.create_new_sheet()
-            self.append_to_sheet(first_name, last_name, discipline, email)
-
-
-email_tracker_filename = r'C:\Users\ukaea001\Documents\PythonPrograms\PLMB\Reminders\Email_listing_tracker.xlsx'
-sheetname = 'Invoice'
-f = ExcelTracker(email_tracker_filename, sheetname)
-print(f)
+            self.append_to_sheet(first_name, last_name, discipline, email, cc_contacts)
