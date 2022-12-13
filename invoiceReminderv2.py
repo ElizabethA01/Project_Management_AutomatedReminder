@@ -20,9 +20,9 @@ def send_invoice_email(tracker: str, sheetname: str, contact_list: str, required
         leads = DisciplineLead(first_name=lead[0], last_name=lead[1], email=lead[2], discipline=lead[3])
         if leads.first_name in required_contacts:
             outcome = InvoiceEmail.send_invoice_reminder(first_name= leads.first_name, discipline=leads.discipline, email_to= leads.email, cc_contacts=cc_contacts)
-            if outcome == True:
+            if outcome is True:
                 print('Invoice email alert activated - message sent')
-                ExcelTracker(tracker, sheetname).add_to_tracker(first_name= leads.first_name, last_name=leads.last_name, discipline=leads.discipline, email= leads.email, cc_contacts=cc_contacts)
+                ExcelTracker(tracker, sheetname).add_to_tracker(first_name= leads.first_name, last_name=leads.last_name, discipline=leads.discipline, email= leads.email, comment=sheetname, cc_contacts=cc_contacts, )
 
 if __name__ == "__main__":
     send_invoice_email(filenames['email_tracker'], filenames['sheetname'], filenames['contacts_list'], contacts['mailTo'], contacts['mailCC'])

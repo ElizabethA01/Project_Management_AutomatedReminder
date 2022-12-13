@@ -3,14 +3,7 @@ import codecs
 import win32com.client as win32
 from datetime import datetime, timedelta
 import calendar
-
-class TimeStamp:
-    now = datetime.now()
-    today_date = int(now.strftime('%d'))
-    starting_monday = now - timedelta(4)
-    week_range = starting_monday.strftime('%d %b %Y') + ' to ' + now.strftime('%d %b %Y')
-    last_day_of_month = calendar.monthrange(now.year, now.month)[1]
-
+    
 # access signature and add to email body
 class EmailSignature:
     sig_files_path = 'AppData\Roaming\Microsoft\Signatures\Elizabeth Adejumo_py_files\\'
@@ -31,12 +24,14 @@ class EmailSignature:
 
 class SendEmail:
     img_path = r'C:\Users\ukaea001\AppData\Roaming\Microsoft\Signatures\Elizabeth Adejumo_files\image001.png'
+    now = datetime.now()
 
     @classmethod
     def draft_email(cls, email_body: str, subject: str, email_to: str, cc_contacts: str = None):
         try:
             mail = win32.Dispatch('outlook.application').CreateItem(0)
             mail.To, mail.cc, mail.Subject = email_to, cc_contacts, subject
+            print('here1')
             signature_code = EmailSignature.get_signature()
             mail.HTMLBody = email_body + signature_code
             # Adding signature image
@@ -52,7 +47,8 @@ class SendEmail:
             return True
             # raise exception instead! ----------------------------------------------
         except Exception as e:
-            print("Invoice email alert failed to send: " + str(e) + ". You need to open the outlook application to ensure email sends.")
+            print("Email alert failed to send: " + str(e))
+            return False
                 
 class InvoiceEmail(SendEmail):
     def __init__(self) -> None:
@@ -60,8 +56,8 @@ class InvoiceEmail(SendEmail):
 
     @classmethod
     def send_invoice_reminder(cls, first_name: str, discipline: str, email_to: str, cc_contacts: str = None):
-        previous_month = calendar.month_name[TimeStamp.now.month-1]
-        subject = f'PLMB {discipline} - Invoice Reminder for {previous_month} ' + TimeStamp.now.strftime('%Y')
+        previous_month = calendar.month_name[cls.now.month-1]
+        subject = f'PLMB {discipline} - Invoice Reminder for {previous_month} ' + cls.now.strftime('%Y')
         email_body = r'''
             Hi {2},<br><br>
             This is a reminder that we are still awaiting your invoice for <b>{0} {1}</b>. <br><br>
@@ -69,10 +65,67 @@ class InvoiceEmail(SendEmail):
             Please ensure that when you send through your invoices, you include a copy of the timesheets to back up the invoice. <br><br>
             Please ignore this email if you have sent your invoice previously. <br><br>
             Thanks.<br><br>
-            '''.format(previous_month, TimeStamp.now.year, first_name)
+            '''.format(previous_month, cls.now.year, first_name)
+        outcome = cls.draft_email(email_body = email_body, subject = subject, email_to = email_to, cc_contacts=cc_contacts)
+        return outcome
+    
+class TimesheetEmail(SendEmail):
+    def __init__(self) -> None:
+        super().__init__()
+
+    @classmethod
+    def send_friday_month_end(cls, first_name: str, discipline: str, email_to: str, cc_contacts: str = None):
+        subject = f'PLMB {discipline} Timesheet reminder - Month end'
+        email_body = r'''
+            Hi {0},<br><br>
+            This is a reminder that it is month end. Could you please send your timesheet for this week by <b>COB today</b>. <br><br>
+            Please ignore this email if you have sent your timesheet previously. <br><br>
+            Thanks.<br><br>
+            '''.format(first_name)
         outcome = cls.draft_email(email_body = email_body, subject = subject, email_to = email_to, cc_contacts=cc_contacts)
         return outcome
 
+    @classmethod
+    def send_friday_alert(cls, first_name: str, discipline: str, email_to: str, cc_contacts: str = None):
+        starting_monday = cls.now - timedelta(4)
+        week_range = starting_monday.strftime('%d %b %Y') + ' to ' + cls.now.strftime('%d %b %Y')
+        subject = f'PLMB {discipline} Timesheet reminder - ' + week_range
+        email_body = r'''
+            Hi {0},<br><br>
+            This is a reminder to send your timesheet for {1} by <b>COB today</b>. <br><br>
+            Please ignore this email if you have sent your timesheet previously. <br><br>
+            Thanks.<br><br>
+            '''.format(first_name, week_range)
+        outcome = cls.draft_email(email_body = email_body, subject = subject, email_to = email_to, cc_contacts=cc_contacts)
+        return outcome
+    
+    @classmethod
+    def send_midweek_month_end(cls, first_name: str, discipline: str, email_to: str, cc_contacts: str = None):
+        subject = f'PLMB {discipline} Timesheet reminder - Month end tomorrow' 
+        email_body = r'''
+            Hi {0},<br><br>
+            This is a reminder that it is month end tomorrow. Could you please send your timesheet for this week by <b>12PM tomorrow</b>. <br><br>
+            Thanks.<br><br>
+            '''.format(first_name)
+        outcome = cls.draft_email(email_body = email_body, subject = subject, email_to = email_to, cc_contacts=cc_contacts)
+        return outcome
 
-    
-    
+    @classmethod
+    def send_timesheet_reminder(cls, first_name: str, discipline: str, email_to: str, cc_contacts: str = None):
+        today_date = int(cls.now.strftime('%d'))
+        last_day_of_month = calendar.monthrange(cls.now.year, cls.now.month)[1]
+        if today_date == last_day_of_month - 1:
+            outcome = cls.send_midweek_month_end(first_name, discipline, email_to, cc_contacts)
+            alert = 'Month end'
+        elif cls.now.strftime('%A') == 'Friday' and today_date != last_day_of_month:   
+            if today_date + 1 == last_day_of_month or today_date + 2 == last_day_of_month or today_date + 3 == last_day_of_month:
+                outcome = cls.send_friday_month_end(first_name, discipline, email_to, cc_contacts)
+                alert = 'Month end (during weekend)'
+            else:
+                outcome = cls.send_friday_alert(first_name, discipline, email_to, cc_contacts)
+                alert = 'Friday timesheet'
+        else:
+            outcome = "no timesheet reminder today"
+            alert = ""
+        return outcome, alert
+        

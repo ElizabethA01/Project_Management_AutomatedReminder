@@ -9,12 +9,9 @@ class ExcelTracker:
         self.sheetname = sheetname
         self.alert = alert     
 
-    def append_to_sheet(self, first_name, last_name, discipline, email, cc_contacts):
+    def append_to_sheet(self, first_name, last_name, discipline, email, cc_contacts, comment):
         wb = openpyxl.load_workbook(self.email_tracker_filename)
-        if self.sheetname == "Timesheet":
-            df = pd.DataFrame([[ExcelTracker.now, first_name + ' ' + last_name, discipline, email, cc_contacts, self.sheetname + ' - '+ self.alert]])
-        else: 
-            df = pd.DataFrame([[ExcelTracker.now, first_name + ' ' + last_name, discipline, email, cc_contacts, self.sheetname]])
+        df = pd.DataFrame([[ExcelTracker.now, first_name + ' ' + last_name, discipline, email, cc_contacts, comment]])
         writer = pd.ExcelWriter(self.email_tracker_filename, if_sheet_exists='overlay', mode='a', engine='openpyxl')
         wb.active = wb[self.sheetname]
         # get the max rows of non-empty cells
@@ -40,17 +37,17 @@ class ExcelTracker:
         print('new file created')
 
     # check if file does exist 
-    def add_to_tracker(self, first_name: str, last_name: str, discipline: str, email: str, cc_contacts: str = None):
+    def add_to_tracker(self, first_name: str, last_name: str, discipline: str, email: str, comment: str, cc_contacts: str = None):
         wb = openpyxl.load_workbook(self.email_tracker_filename)
         try:
             if self.sheetname in wb.sheetnames: 
                 # if file exists, new email log is appended to file
-                self.append_to_sheet(first_name, last_name, discipline, email, cc_contacts)
+                self.append_to_sheet(first_name, last_name, discipline, email, cc_contacts, comment)
             else:
                 self.create_new_sheet()
-                self.append_to_sheet(first_name, last_name, discipline, email, cc_contacts)
+                self.append_to_sheet(first_name, last_name, discipline, email, cc_contacts, comment)
         except FileNotFoundError:
             print('file not found')
             self.create_new_file()
             self.create_new_sheet()
-            self.append_to_sheet(first_name, last_name, discipline, email, cc_contacts)
+            self.append_to_sheet(first_name, last_name, discipline, email, cc_contacts, comment)
