@@ -1,5 +1,5 @@
 # AutomatedReminders
-> These are backend Python scripts to send weekly automated timesheet reminders and monthly invoice reminders to a list of contacts working on the project to ensure all the finances are updated and correct.
+> I was managing a project with a multifunctional team of 20 Engineers, Project Managers and subconsultants from different levels across 12 countries. Prior to joining the project, there was a problem where financial data was missing or inaccurate in the system, because there wasn't a solid procedure of chasing individuals for timesheets and invoices. To eliminate this issue, I initiated creating automated emails to send weekly and monthly reminders to senior engineers and subconsultants. To do this, I created and debugged backend Python scripts to send weekly automated timesheet reminders and monthly invoice reminders to a list of contacts (in a separate Excel file) working on the project. This ensured that all the finances were sent in a timely manner and they were updated correctly on the system.
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -50,7 +50,8 @@ Room for improvement:
 
 
 ## My Thoughts
-I really enjoyed this project, because it was very practical and I was able to incorporate all the knowledge I gained through the Python courses. This also built my confidence in Python scripts and using the Panda module. 
+-I really enjoyed this project, because it was very practical and I was able to incorporate all the knowledge I gained through the Python courses. This also built my confidence in Python scripts and using the Panda module. 
+- Additionally, it made a significant impact on the project, as it eliminated gaps in the financial data and it helped to show an accurate representation of the cost spending on the project. 
 
 
 ## Acknowledgements
