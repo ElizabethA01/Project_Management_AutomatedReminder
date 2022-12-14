@@ -18,6 +18,7 @@
 ## General Information
 - The purpose of this backend application is to automate weekly timesheet reminders to the multifunctional teams to ensure we achieve 100% accuracy and timely financial records. 
 - I undertook this task as part of my role as a Project Manager as a personal project to increase efficiency within the team and to eliminate discrepancies in the financial  
+- Additionally, I created an email tracker excel file to track all the emails being sent using the Panda library.
 - The first version is the previous version of the file without the use of classes. Version 2 incorporates implementing modules to promote efficiency and to allow repetition without repeating code and following DRY.
 
 
