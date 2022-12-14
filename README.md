@@ -1,5 +1,7 @@
 # AutomatedReminders
-> I was managing a project with a multifunctional team of 20 Engineers, Project Managers and subconsultants from different levels across 12 countries. Prior to joining the project, there was a problem where financial data was missing or inaccurate in the system, because there wasn't a solid procedure of chasing individuals for timesheets and invoices. To eliminate this issue, I initiated creating automated emails to send weekly and monthly reminders to senior engineers and subconsultants. To do this, I created and debugged backend Python scripts to send weekly automated timesheet reminders and monthly invoice reminders to a list of contacts (in a separate Excel file) working on the project. This ensured that all the finances were sent in a timely manner and they were updated correctly on the system.
+> I was managing a project with a multifunctional team of 20 Engineers, Project Managers and subconsultants from different levels across 12 countries. Prior to joining the project, there was a problem where financial data was missing or inaccurate in the system, because there wasn't a solid procedure of chasing individuals for timesheets and invoices. 
+> 
+> To eliminate this issue, I initiated creating automated emails to send weekly and monthly reminders to senior engineers and subconsultants. To do this, I created and debugged backend Python scripts to send weekly automated timesheet reminders and monthly invoice reminders to a list of contacts (in a separate Excel file) working on the project. This ensured that all the finances were sent in a timely manner and they were updated correctly on the system.
 
 ## Table of Contents
 * [General Info](#general-information)
