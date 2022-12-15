@@ -114,7 +114,7 @@ class TimesheetEmail(SendEmail):
     def send_timesheet_reminder(cls, first_name: str, discipline: str, email_to: str, cc_contacts: str = None):
         today_date = int(cls.now.strftime('%d'))
         last_day_of_month = calendar.monthrange(cls.now.year, cls.now.month)[1]
-        if today_date == today_date:
+        if today_date == last_day_of_month - 1:
             outcome = cls.send_midweek_month_end(first_name, discipline, email_to, cc_contacts)
             alert = 'Month end'
         elif cls.now.strftime('%A') == 'Friday' and today_date != last_day_of_month:   
@@ -128,8 +128,6 @@ class TimesheetEmail(SendEmail):
             outcome = "no timesheet reminder today"
             alert = ""
         return outcome, alert
-
-# last_day_of_month - 1
         
 class ValidateEmail(): 
     def check_email(email):

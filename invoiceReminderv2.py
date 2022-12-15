@@ -1,4 +1,3 @@
-
 from Modules.draftEmail import InvoiceEmail
 from Modules.ExcelAdapter import ExcelAdapter
 from Modules.ExcelTracker import ExcelTracker
