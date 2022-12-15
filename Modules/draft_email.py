@@ -139,10 +139,9 @@ class ValidateEmail():
             raise AssertionError(f'{e} - {email}')
 
 class OverdueReminders(SendEmail):
-    tracker_link = 'https://wsponline.sharepoint.com/:x:/r/sites/CO-P1808/2_Wip/2_2_TEC/5.7_SYS_EQU/02_GEN/RAS_Tracker/V3/WSP-GEN-FOR-RAS-TRA-001_V3.xlsm?d=w64cbca852ffc461291e16bef2f99478a&csf=1&web=1&e=i8F16T'
 
     @classmethod
-    def send_overdue_reminder(cls, first_name: str, discipline: str, email_to: str, overdue: int = None, cc_contacts: str = None):
+    def send_overdue_reminder(cls, first_name: str, discipline: str, email_to: str, overdue: int, tracker_link: str, cc_contacts: str = None):
         subject = f'PLMB {discipline} technical reviews - Overdue Items' 
         email_body = '''Hi {0},<br><br>
         There are currently <b>{1} overdue</b> review shown in the MDL tracker which are listed below. Could you please complete the reviews and fill the tracker once completed.<br><br>
@@ -150,7 +149,7 @@ class OverdueReminders(SendEmail):
         If this deliverable is not applicable then please leave the note 'N/A' in <b>column AK</b> and a comment explaining why in <b>column AO </b> so that this is recorded. <br><br>
         For future reviews, could you please complete the tracker once completed.<br><br>
         Thanks.<br><br>
-        '''.format(first_name, overdue, cls.tracker_link)
+        '''.format(first_name, overdue, tracker_link)
         outcome = cls.draft_email(email_body = email_body, subject = subject, email_to = email_to, cc_contacts=cc_contacts)
         return outcome
 
