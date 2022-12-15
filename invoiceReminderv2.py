@@ -1,6 +1,6 @@
-from Modules.draftEmail import InvoiceEmail
-from Modules.ExcelAdapter import ExcelAdapter
-from Modules.ExcelTracker import ExcelTracker
+from Modules.draft_email import InvoiceEmail
+from Modules.excel_adapter import ExcelAdapter
+from Modules.excel_tracker import ExcelTracker
 from Modules.disciplines_details import DisciplineLead
 
 # required inputs

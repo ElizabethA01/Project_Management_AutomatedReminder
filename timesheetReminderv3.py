@@ -1,7 +1,7 @@
 
-from Modules.draftEmail import TimesheetEmail
-from Modules.ExcelAdapter import ExcelAdapter
-from Modules.ExcelTracker import ExcelTracker
+from Modules.draft_email import TimesheetEmail
+from Modules.excel_adapter import ExcelAdapter
+from Modules.excel_tracker import ExcelTracker
 from Modules.disciplines_details import DisciplineLead
 import time
 
