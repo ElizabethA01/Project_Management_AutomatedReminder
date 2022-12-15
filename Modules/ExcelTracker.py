@@ -19,7 +19,7 @@ class ExcelTracker:
         # #Convert dataframe to an Xlsxwrite excel object
         df.to_excel(writer, sheet_name= self.sheetname, index=False, header=False, startrow=filled_rows)
         writer.close()
-        print('Added data')
+        print('Added data to tracker')
         
     # if sheet does not exist
     def create_new_sheet(self):

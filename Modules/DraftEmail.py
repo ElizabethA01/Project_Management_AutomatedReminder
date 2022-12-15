@@ -3,6 +3,7 @@ import codecs
 import win32com.client as win32
 from datetime import datetime, timedelta
 import calendar
+from email_validator import validate_email, EmailNotValidError
     
 # access signature and add to email body
 class EmailSignature:
@@ -29,26 +30,25 @@ class SendEmail:
     @classmethod
     def draft_email(cls, email_body: str, subject: str, email_to: str, cc_contacts: str = None):
         try:
-            mail = win32.Dispatch('outlook.application').CreateItem(0)
-            mail.To, mail.cc, mail.Subject = email_to, cc_contacts, subject
-            print('here1')
-            signature_code = EmailSignature.get_signature()
-            mail.HTMLBody = email_body + signature_code
-            # Adding signature image
-            inspector = mail.getInspector
-            doc = inspector.WordEditor
-            selection = doc.Content
-            selection.Find.Text = "insert image"
-            selection.Find.Execute()
-            selection.Text = ""
-            img = selection.InlineShapes.AddPicture(cls.img_path, 0, 1)
-            mail.display()
-            # mail.Send()
-            return True
-            # raise exception instead! ----------------------------------------------
+            if ValidateEmail.check_email(email_to) and ValidateEmail.check_email(cc_contacts) is True:
+                mail = win32.Dispatch('outlook.application').CreateItem(0)
+                mail.To, mail.cc, mail.Subject = email_to, cc_contacts, subject
+                signature_code = EmailSignature.get_signature()
+                mail.HTMLBody = email_body + signature_code
+                # Adding signature image
+                inspector = mail.getInspector
+                doc = inspector.WordEditor
+                selection = doc.Content
+                selection.Find.Text = "insert image"
+                selection.Find.Execute()
+                selection.Text = ""
+                img = selection.InlineShapes.AddPicture(cls.img_path, 0, 1)
+                mail.display()
+                # mail.Send()
+                return True
+        # raise exception instead! ----------------------------------------------
         except Exception as e:
-            print("Email alert failed to send: " + str(e))
-            return False
+            return "Email alert failed to send: " + str(e)
                 
 class InvoiceEmail(SendEmail):
     def __init__(self) -> None:
@@ -114,7 +114,7 @@ class TimesheetEmail(SendEmail):
     def send_timesheet_reminder(cls, first_name: str, discipline: str, email_to: str, cc_contacts: str = None):
         today_date = int(cls.now.strftime('%d'))
         last_day_of_month = calendar.monthrange(cls.now.year, cls.now.month)[1]
-        if today_date == last_day_of_month - 1:
+        if today_date == today_date:
             outcome = cls.send_midweek_month_end(first_name, discipline, email_to, cc_contacts)
             alert = 'Month end'
         elif cls.now.strftime('%A') == 'Friday' and today_date != last_day_of_month:   
@@ -128,4 +128,14 @@ class TimesheetEmail(SendEmail):
             outcome = "no timesheet reminder today"
             alert = ""
         return outcome, alert
+
+# last_day_of_month - 1
         
+class ValidateEmail(): 
+    def check_email(email):
+        try:
+            v = validate_email(email)
+            email = v["email"]
+            return True
+        except EmailNotValidError as e:
+            raise AssertionError(f'{e} - {email}')
