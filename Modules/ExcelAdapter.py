@@ -12,6 +12,3 @@ class ExcelAdapter:
         df = self.extract_data_to_df()
         df_list = df.values.tolist()
         return df_list
-    
-
-
