@@ -12,7 +12,7 @@ filenames = {
 }
 contacts= {  
     "mailCC": 'carolina.morales@wsp.com', # add correct email address
-    "mailTo": ['Nelson', 'Benny', 'David']
+    "mailTo": ['Benny', 'David']
 }
 
 def send_timesheet_email(tracker: str, sheetname: str, contact_list: str, required_contacts: str, cc_contacts: str):
