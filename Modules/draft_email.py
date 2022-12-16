@@ -145,7 +145,7 @@ class OverdueReminders(SendEmail):
         subject = f'PLMB {discipline} technical reviews - Overdue Items' 
         email_body = '''Hi {0},<br><br>
         There are currently <b>{1} overdue</b> review shown in the MDL tracker which are listed below. Could you please complete the reviews and fill the tracker once completed.<br><br>
-        If you have completed these reviews previously, could you please include the date of completion in <b>column AK</b> in the MDL tracker: <br><br> <a href={2}>WSP-GEN-FOR-RAS-TRA-001_V3</a> <br><br> 
+        If you have completed these reviews previously, could you please include the date of completion in <b>column AK</b> in the MDL tracker: <br><br> <a href={2}>XXX-GEN-FOR-RAS-TRA-001_V3</a> <br><br> 
         If this deliverable is not applicable then please leave the note 'N/A' in <b>column AK</b> and a comment explaining why in <b>column AO </b> so that this is recorded. <br><br>
         For future reviews, could you please complete the tracker once completed.<br><br>
         Thanks.<br><br>
