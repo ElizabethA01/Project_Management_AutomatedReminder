@@ -38,12 +38,10 @@ now = datetime.now()
 
 # dictionary of contact list 
 mailTo_contacts = {
-    'David': ['David Starbuck', 'david.starbuck@wsp.com', 'Depot and PDAP'],
-    'Benny': ['Benny Lee', 'benny.lee@wsp.com', 'AFC HK'],
-    'Nelson': ['Nelson Ng', 'nelson.ng@wsp.com', 'PDAP HK']
+
 }
 
-mailCC_contacts = 'carolina.morales@wsp.com'
+mailCC_contacts = ''
 
 def send_invoice_email(): 
     # loop to send emails to each contact

@@ -10,8 +10,8 @@ filenames = {
     "contacts_list": r'C:\Users\ukaea001\Documents\PythonPrograms\PLMB\Reminders\List_of_contacts.xlsx',
 }
 contacts= {  
-    "mailCC": 'carolina.morales@wsp.com', # add correct email address
-    "mailTo": ['David', 'Benny', 'Nelson']
+    "mailCC": "",
+    "mailTo": []
 }
 
 def send_invoice_email(tracker: str, sheetname: str, contact_list: str, required_contacts: str, cc_contacts: str):

@@ -10,7 +10,7 @@ filenames = {
 
 }
 contacts= {  
-    "mailCC": 'carolina.morales@wsp.com', # add correct email address
+    "mailCC": ""
 }
 
 def send_overdue_reminders(sheetname: str, contact_list: str, cc_contacts: str, tracker: str):

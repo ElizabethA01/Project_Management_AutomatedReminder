@@ -40,13 +40,10 @@ last_day_of_month = calendar.monthrange(now.year, now.month)[1]
 
 # dictionaries
 mailTo_contacts = {
-    'David': ['David Starbuck', 'david.starbuck@wsp.com', 'Depot and PDAP'],
-    # 'Benny': ['Benny Lee', 'benny.lee@wsp.com', 'AFC HK'],
-    # 'Nelson': ['Nelson Ng', 'nelson.ng@wsp.com', 'PDAP HK'],
-    # 'Elizabeth': ['Elizabeth Ade', 'elizjumo01@gmail.com', 'TRIAL']
+    
 }
 
-mailCC_contacts = 'carolina.morales@wsp.com'
+mailCC_contacts = ''
 
 month_end = {
     'mail_subject': 'Month end tomorrow',
