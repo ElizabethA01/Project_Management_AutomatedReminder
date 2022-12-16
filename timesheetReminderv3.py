@@ -11,7 +11,7 @@ filenames = {
 }
 contacts= {  
     "mailCC": "",
-    "mailTo": ['Benny', 'David']
+    "mailTo": []
 }
 
 def send_timesheet_email(tracker: str, sheetname: str, contact_list: str, required_contacts: str, cc_contacts: str):

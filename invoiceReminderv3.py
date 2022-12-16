@@ -5,13 +5,13 @@ from Modules.disciplines_details import DisciplineLead
 
 # required inputs
 filenames = {
-    "email_tracker": r'C:\Users\ukaea001\Documents\PythonPrograms\PLMB\Reminders\Email_listing_tracker.xlsx',
+    "email_tracker": '',
     "sheetname": 'Invoice',
-    "contacts_list": r'C:\Users\ukaea001\Documents\PythonPrograms\PLMB\Reminders\List_of_contacts.xlsx',
+    "contacts_list": ''
 }
 contacts= {  
     "mailCC": "",
-    "mailTo": ['David', 'Benny', 'Nelson']
+    "mailTo": []
 }
 
 def send_invoice_email(tracker: str, sheetname: str, contact_list: str, required_contacts: str, cc_contacts: str):
