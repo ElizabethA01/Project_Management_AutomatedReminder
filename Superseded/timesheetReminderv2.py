@@ -6,9 +6,9 @@ from Modules.disciplines_details import DisciplineLead
 
 # required inputs
 filenames = {
-    "email_tracker": r'C:\Users\ukaea001\Documents\PythonPrograms\PLMB\Reminders\Email_listing_tracker.xlsx',
+    "email_tracker": '',
     "sheetname": 'Timesheet',
-    "contacts_list": r'C:\Users\ukaea001\Documents\PythonPrograms\PLMB\Reminders\List_of_contacts.xlsx',
+    "contacts_list": '',
 }
 contacts= {  
     "mailCC": "",

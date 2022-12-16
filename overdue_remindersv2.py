@@ -5,8 +5,8 @@ from Modules.draft_email import OverdueReminders
 
 filenames = {
     "ml1 sheetname": 'SAT MDL Tracker',
-    "contacts_list": r'C:\Users\ukaea001\Documents\PythonPrograms\PLMB\Reminders\List_of_contacts.xlsx',
-    "tracker_link": 'https://wsponline.sharepoint.com/:x:/r/sites/CO-P1808/2_Wip/2_2_TEC/5.7_SYS_EQU/02_GEN/RAS_Tracker/V3/WSP-GEN-FOR-RAS-TRA-001_V3.xlsm?d=w64cbca852ffc461291e16bef2f99478a&csf=1&web=1&e=i8F16T'
+    "contacts_list": '',
+    "tracker_link": ''
 
 }
 contacts= {  

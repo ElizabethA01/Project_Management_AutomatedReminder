@@ -9,9 +9,9 @@ import openpyxl
 from xlsxwriter import Workbook
 
 # access signature and add to email body
-sig_files_path = 'AppData\Roaming\Microsoft\Signatures\Elizabeth Adejumo_py_files\\'
-sig_html_path = 'AppData\Roaming\Microsoft\Signatures\Elizabeth Adejumo_py.htm'
-img_path = r'C:\Users\ukaea001\AppData\Roaming\Microsoft\Signatures\Elizabeth Adejumo_files\image001.png'
+sig_files_path = ''
+sig_html_path = ''
+img_path = ''
 
 # 'C:\Users\ukaea001\AppData\Roaming\Microsoft\Signatures\Elizabeth Adejumo.htm'
 
@@ -28,7 +28,7 @@ signature_code = signature_code.replace(('Elizabeth Adejumo_files/'), signature_
 html_file.close()
 
 # email tracking list excel file location
-email_tracker_filename = r'C:\Users\ukaea001\Documents\PythonPrograms\PLMB\Reminders\Email_listing_tracker.xlsx'
+email_tracker_filename = ''
 invoice_sheetname = 'Invoice'
 
 #INPUTS 
