@@ -10,7 +10,7 @@ filenames = {
     "contacts_list": r'C:\Users\ukaea001\Documents\PythonPrograms\PLMB\Reminders\List_of_contacts.xlsx',
 }
 contacts= {  
-    "mailCC": 'carolina.morales@wsp.com', # add correct email address
+    "mailCC": "",
     "mailTo": ['David', 'Benny', 'Nelson']
 }
 
